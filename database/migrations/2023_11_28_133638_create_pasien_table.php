@@ -16,10 +16,9 @@ return new class extends Migration
             $table->string('nama_pasien');
             $table->longText('alamat');
             $table->string('telepon');
-            $table->string('nama_rs');
             $table->timestamps();
-            $table->foreign('nama_rs')->references('id')->on('rs');
-            $table->foreign('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('id_rs')->references('id')->on('rs');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
     }
 
