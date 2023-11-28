@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\RsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/daftar', [UserController::class, 'daftar']);
+Route::post('/daftar', [UserController::class, 'daftarbaru']);
+Route::post('/masuk', [UserController::class, 'login']);
+
+Route::get('/beranda', [BerandaController::class, 'beranda']);
+
+Route::post('/tambahrs', [RsController::class, 'tambahrs']);
