@@ -15,13 +15,13 @@ class RsController extends Controller
             'namaRs' => 'required',
             'alamat' => 'required',
             'email' => 'required',
-            'handphone' => 'required',
+            'telepon' => 'required',
         ]);
 
-        $inFields['namaRs'] = strip_tags($inFields['namaRs']);
+        $inFields['nama_rs'] = strip_tags($inFields['namaRs']);
         $inFields['alamat'] = strip_tags($inFields['alamat']);
         $inFields['email'] = strip_tags($inFields['email']);
-        $inFields['handphone'] = strip_tags($inFields['handphone']);
+        $inFields['telepon'] = strip_tags($inFields['telepon']);
         $inFields['user_id'] = auth()->id();
 
         $rsBaru = Rs::create($inFields);
