@@ -15,8 +15,8 @@
     <input type="email" class="form-control" name="email">
   </div>
   <div class="mb-3">
-    <label for="handphone" class="form-label">handphone</label>
-    <input type="text" class="form-control" name="handphone">
+    <label for="telepon" class="form-label">telepon</label>
+    <input type="text" class="form-control" name="telepon">
   </div>
   <button type="submit" class="btn btn-primary">Simpan</button>
 </form>
