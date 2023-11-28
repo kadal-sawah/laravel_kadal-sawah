@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 
 class RsController extends Controller
 {
-    public function tambahrs(Request $request){
+    public function store(Request $request){
         // return dd($request);
         $inFields = $request->validate([
             'namaRs' => 'required',
@@ -25,6 +25,11 @@ class RsController extends Controller
         $inFields['user_id'] = auth()->id();
 
         $rsBaru = Rs::create($inFields);
-        return redirect("/beranda");
+        return redirect("/rs");
+    }
+
+    public function delete(Rs $rs){
+        $rs->delete();
+        return redirect('/rs');
     }
 }
