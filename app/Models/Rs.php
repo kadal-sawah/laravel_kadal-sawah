@@ -16,4 +16,8 @@ class Rs extends Model
     public function user(){
         return $this->belongsTo(User::class,'user_id');
     }
+
+    public function pasien(){
+        return $this->hasMany(Pasien::class, 'id_rs');
+    }
 }
