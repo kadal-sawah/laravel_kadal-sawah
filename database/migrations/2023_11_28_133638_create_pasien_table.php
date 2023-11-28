@@ -17,7 +17,7 @@ return new class extends Migration
             $table->longText('alamat');
             $table->string('telepon');
             $table->timestamps();
-            $table->foreignId('id_rs')->references('id')->on('rs');
+            $table->foreignId('id_rs')->references('id')->on('rs')->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
     }
