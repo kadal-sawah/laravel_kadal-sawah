@@ -1,6 +1,6 @@
 <x-content>
 <h1>Rumah Sakit</h1>
-<form action="tambahrs" method="post">
+<form action="rs" method="post">
 @csrf
   <div class="mb-3">
     <label for="namaRs" class="form-label">nama rumah sakit</label>
