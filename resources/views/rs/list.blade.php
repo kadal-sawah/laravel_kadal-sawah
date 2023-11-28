@@ -18,7 +18,7 @@
         <td>{{$rs->telepon}}</td>
         <td>
             <a href="/rs/{{$rs->id}}/edit" class="btn btn-secondary btn-sm edit">edit</a>
-            <form action="/deleters/{{$rs->id}}" method="post">
+            <form action="/rs/{{$rs->id}}/delete" method="post">
             @csrf
             @method('DELETE')
                 <button class="btn btn-secondary btn-sm btn-warning delete">delete</button>
