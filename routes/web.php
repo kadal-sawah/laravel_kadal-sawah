@@ -24,7 +24,9 @@ Route::post('/daftar', [UserController::class, 'daftarbaru']);
 Route::post('/masuk', [UserController::class, 'login']);
 
 Route::get('/beranda', [BerandaController::class, 'beranda']);
-Route::get('/rs',[BerandaController::class,'viewrs']);
 
-Route::post('/tambahrs', [RsController::class, 'store']);
+Route::get('/rs',[RsController::class,'view']);
+Route::post('/rs', [RsController::class, 'store']);
+Route::get('/rs/{rs}/edit', [RsController::class, 'edit']);
+Route::put('/rs/{rs}', [RsController::class, 'doupdate']);
 Route::delete('/deleters/{rs}', [RsController::class,'delete']);
