@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('pasien', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_pasien');
+            $table->longText('alamat');
+            $table->string('telepon');
+            $table->string('nama_rs');
             $table->timestamps();
+            $table->foreign('nama_rs')->references('id')->on('rs');
+            $table->foreign('user_id')->constrained()->onDelete('cascade');
         });
     }
 

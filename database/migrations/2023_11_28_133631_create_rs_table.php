@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('rs', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_rs');
+            $table->longText('alamat');
+            $table->string('email')->unique();
+            $table->string('telepon');
             $table->timestamps();
+            $table->foreign('user_id')->constrained()->onDelete('cascade');
         });
     }
 
