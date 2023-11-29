@@ -42,7 +42,11 @@ class PasienController extends Controller
     }
 
     public function edit(Pasien $pasien){
-        return view('pasien.edit-pasien',['pasien' => $pasien]);
+        // $data['list_rs'] = Rs::orderBy('id','desc')->get();
+        return view('pasien.edit-pasien',[
+            'pasien' => $pasien, 
+            'list_rs' => Rs::orderBy('id','desc')->get()
+            ]);
     }
 
     public function doupdate(Pasien $pasien, Request $request){
