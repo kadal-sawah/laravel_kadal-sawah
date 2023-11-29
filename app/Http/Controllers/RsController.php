@@ -18,10 +18,10 @@ class RsController extends Controller
     public function store(Request $request){
         // return dd($request);
         $inFields = $request->validate([
-            'namaRs' => 'required',
-            'alamat' => 'required',
-            'email' => 'required',
-            'telepon' => 'required',
+            'namaRs' => ['required', 'min:6', 'max:50', Rule::unique('rs','nama_rs')],
+            'alamat' => ['required', 'min:10', 'max:50'],
+            'email' => ['required', 'email', Rule::unique('rs','email')],
+            'telepon' => ['required', 'min:10', 'max:13']
         ]);
 
         $inFields['nama_rs'] = strip_tags($inFields['namaRs']);
@@ -31,7 +31,7 @@ class RsController extends Controller
         $inFields['user_id'] = auth()->id();
 
         $rsBaru = Rs::create($inFields);
-        return redirect("/rs");
+        return redirect("/beranda")->with('sukses','berhasil menambahkan data');
     }
 
     public function edit(Rs $rs){
@@ -40,19 +40,19 @@ class RsController extends Controller
 
     public function doupdate(Rs $rs, Request $request){
         $inFields = $request->validate([
-            'namaRs' => 'required',
-            'alamat' => 'required',
-            'email' => 'required',
-            'telepon' => 'required',
+            'namaRs' => ['required', 'min:6', 'max:50', Rule::unique('rs','nama_rs')->ignore($rs->id)],
+            'alamat' => ['required', 'min:10', 'max:50'],
+            'email' => ['required', 'email', Rule::unique('rs','email')->ignore($rs->id)],
+            'telepon' => ['required', 'min:10', 'max:13']
         ]);
 
-        $inFields['nama_rs'] = $inFields['namaRs'];
-        $inFields['alamat'] = $inFields['alamat'];
-        $inFields['email'] = $inFields['email'];
-        $inFields['telepon'] = $inFields['telepon'];
+        $inFields['nama_rs'] = strip_tags($inFields['namaRs']);
+        $inFields['alamat'] = strip_tags($inFields['alamat']);
+        $inFields['email'] = strip_tags($inFields['email']);
+        $inFields['telepon'] = strip_tags($inFields['telepon']);
 
         $rs->update($inFields);
-        return redirect("/rs");
+        return redirect("/rs")->with('sukses','data '.$inFields['nama_rs'].' telah diperbarui');
     }
 
     public function delete(Rs $rs){
