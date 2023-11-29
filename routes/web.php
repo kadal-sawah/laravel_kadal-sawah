@@ -43,3 +43,6 @@ Route::post('/pasien', [PasienController::class, 'store']);
 Route::get('/pasien/{pasien}/edit', [PasienController::class, 'edit']);
 Route::put('/pasien/{pasien}', [PasienController::class, 'doupdate']);
 Route::delete('/pasien/{pasien}/delete', [PasienController::class, 'delete']);
+
+// Ajax
+Route::post('/ajax/pasien/filter', [PasienController::class, 'ajaxfilter']);

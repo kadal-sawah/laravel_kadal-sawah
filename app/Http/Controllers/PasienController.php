@@ -11,8 +11,11 @@ class PasienController extends Controller
 {
     public function view(){
         // $data['list_pasien'] = Pasien::orderBy('id','desc')->paginate(10);
-        $data['list_pasien'] = Pasien::with('rs')->get();
-        return view ('pasien.list', $data);
+        // $data['list_pasien'] = Pasien::with('rs')->get();
+        return view ('pasien.list', [
+            'list_pasien' => Pasien::with('rs')->get(),
+            'list_rs' => Rs::orderBy('id','desc')->get()
+            ]);
     }
 
     public function showform()
@@ -69,5 +72,19 @@ class PasienController extends Controller
     public function delete(Pasien $pasien){
         $pasien->delete();
         return redirect('/pasien');
+    }
+
+    public function ajaxfilter(Request $request){
+        // return $request['value'];
+        $val = $request['value'];
+        $list_pasien = Pasien::where('id_rs',$val)->get();
+        // return $list_pasien;
+        $html = view('pasien\filter-ajax',compact('list_pasien'))->render();
+
+        return response()->json([
+            'status' => true,
+            'html' => $html,
+            'message' => 'ok'
+        ]);
     }
 }
