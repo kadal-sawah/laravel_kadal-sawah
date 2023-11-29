@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserEvent;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -22,7 +23,22 @@ class UserController extends Controller
 
         $inFields['password'] = bcrypt($inFields['password']);
         $user = User::create($inFields);
-        return redirect('/');
+        auth()->login($user);
+        return redirect('/beranda')->with('sukses','selamat datang...');
+    }
+
+    public function loginApi(Request $request){
+        $inFields = $request->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+
+        if(auth()->attempt($inFields)){
+            $user = User::where('username', $inFields['username'])->first();
+            $token = $user->createToken('myToken')->plainTextToken;
+            return $token;
+        }
+        return 'maaf terjadi kesalahan';
     }
 
     public function login(Request $request){
@@ -33,15 +49,21 @@ class UserController extends Controller
         if(auth()->attempt([
             'username' => $inFields['username'], 'password' => $inFields['password']])){
                 $request->session()->regenerate();
-                return redirect('/beranda');
+                event(new UserEvent([
+                    'username' => auth()->user()->username, 'action' => 'login'
+                ]));
+                return redirect('/beranda')->with('sukses', 'anda berhasil masuk');
             }else{
-                return redirect('/');
+                return redirect('/')->with('gagal', 'terjadi kesalahan');
             }
     }
 
     public function logout(){
+        event(new UserEvent([
+            'username' => auth()->user()->username, 'action' => 'logout'
+        ]));
         auth()->logout();
-        return redirect('/');
+        return redirect('/')->with('sukses','anda telah keluar.');
     }
 
 }
