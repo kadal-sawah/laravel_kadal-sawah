@@ -23,9 +23,9 @@
         <label for="telepon" class="form-label">rumah sakit</label>
         <select class="form-select" name="id_rs">
         @foreach($list_rs as $rs)
-        <option value="{{$rs->id}}" selected="@selected(old('id_rs') == $rs->id)">
+        <!-- <option value="{{$rs->id}}" @selected(old('id_rs') == $rs->id)> -->
+        <option value="{{$rs->id}}" {{ $rs->id == $pasien->id_rs ? 'selected' : '' }}>
         {{$rs->nama_rs}}
-        </option>
         @endforeach
         </select>
     </div>
