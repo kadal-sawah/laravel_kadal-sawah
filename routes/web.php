@@ -25,6 +25,7 @@ Route::get('/', function () {
 Route::get('/daftar', [UserController::class, 'daftar']);
 Route::post('/daftar', [UserController::class, 'daftarbaru']);
 Route::post('/masuk', [UserController::class, 'login']);
+Route::post('keluar', [UserController::class, 'logout']);
 
 // Dummy
 Route::get('/beranda', [BerandaController::class, 'beranda']);
